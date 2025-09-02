@@ -47,8 +47,7 @@ class PlaneIndicator extends StatefulWidget {
   State<PlaneIndicator> createState() => _PlaneIndicatorState();
 }
 
-class _PlaneIndicatorState extends State<PlaneIndicator>
-    with TickerProviderStateMixin {
+class _PlaneIndicatorState extends State<PlaneIndicator> with TickerProviderStateMixin {
   static final _planeTween = CurveTween(curve: Curves.easeInOut);
   late AnimationController _planeController;
   late AnimationController _planeOutInController;
@@ -183,8 +182,7 @@ class _PlaneIndicatorState extends State<PlaneIndicator>
           ),
           builder: (BuildContext context, Widget? child) {
             return Transform.translate(
-              offset: Offset(0.0,
-                  10 * (0.5 - _planeTween.transform(_planeController.value))),
+              offset: Offset(0.0, 10 * (0.5 - _planeTween.transform(_planeController.value))),
               child: child,
             );
           },
@@ -218,14 +216,11 @@ class _PlaneIndicatorState extends State<PlaneIndicator>
                 _planeOutInController.value = 0.0;
               }
               if (change.didChange(to: IndicatorState.complete)) {
-                _planeOutInController.animateTo(1.0,
-                    duration:
-                        _completeDuration - const Duration(milliseconds: 100));
+                _planeOutInController.animateTo(1.0, duration: _completeDuration - const Duration(milliseconds: 100));
               }
             },
             onRefresh: () => Future.delayed(const Duration(seconds: 3)),
-            builder: (BuildContext context, Widget child,
-                IndicatorController controller) {
+            builder: (BuildContext context, Widget child, IndicatorController controller) {
               final clamped = controller.clamp(0, 1);
 
               return AnimatedBuilder(
@@ -252,10 +247,7 @@ class _PlaneIndicatorState extends State<PlaneIndicator>
                                       gradient: LinearGradient(
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: [
-                                          Colors.blue[100]!.withOpacity(.2),
-                                          Colors.blue[100]!.withOpacity(0.0)
-                                        ],
+                                        colors: [Colors.blue[100]!.withOpacity(.2), Colors.blue[100]!.withOpacity(0.0)],
                                       ),
                                     ),
                                   ),
@@ -264,12 +256,8 @@ class _PlaneIndicatorState extends State<PlaneIndicator>
                                 for (final cloud in _clouds)
                                   Transform.translate(
                                     offset: Offset(
-                                      ((screenWidth + cloud.width) *
-                                              cloud.controller!.value) -
-                                          cloud.width,
-                                      -cloud.width +
-                                          ((cloud.width + cloud.dy) *
-                                              controller.value),
+                                      ((screenWidth + cloud.width) * cloud.controller!.value) - cloud.width,
+                                      -cloud.width + ((cloud.width + cloud.dy) * controller.value),
                                     ),
                                     child: SizedBox(
                                       width: cloud.width,
@@ -285,15 +273,10 @@ class _PlaneIndicatorState extends State<PlaneIndicator>
                                 /// plane
                                 Transform.translate(
                                   offset: Offset(
-                                    controller.state.isComplete ||
-                                            controller.state.isFinalizing
+                                    controller.state.isComplete || controller.state.isFinalizing
                                         ? constraints.maxWidth *
-                                            (0.5 -
-                                                Curves.easeInCirc.transform(
-                                                    _planeOutInController
-                                                        .value))
-                                        : constraints.maxWidth *
-                                            (1.0 - (controller.value * 0.5)),
+                                            (0.5 - Curves.easeInCirc.transform(_planeOutInController.value))
+                                        : constraints.maxWidth * (1.0 - (controller.value * 0.5)),
                                     -52 + (100 * controller.value),
                                   ),
                                   child: Align(

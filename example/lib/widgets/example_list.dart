@@ -176,24 +176,20 @@ class ExampleHorizontalList extends StatelessWidget {
                 parent: ClampingScrollPhysics(),
               ),
               slivers: [
-                if (!isHorizontal && leading != null && !reverse)
-                  SliverToBoxAdapter(child: leading!),
+                if (!isHorizontal && leading != null && !reverse) SliverToBoxAdapter(child: leading!),
                 SliverPadding(
                   padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                   sliver: SliverList.separated(
-                    itemBuilder: (BuildContext context, int index) =>
-                        const AppCard(
+                    itemBuilder: (BuildContext context, int index) => const AppCard(
                       margin: EdgeInsets.zero,
                       width: 300,
                       height: 300,
                     ),
                     itemCount: itemCount,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox.square(dimension: 16),
+                    separatorBuilder: (BuildContext context, int index) => const SizedBox.square(dimension: 16),
                   ),
                 ),
-                if (!isHorizontal && leading != null && reverse)
-                  SliverToBoxAdapter(child: leading!),
+                if (!isHorizontal && leading != null && reverse) SliverToBoxAdapter(child: leading!),
               ],
             ),
           ),

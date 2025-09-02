@@ -16,9 +16,7 @@ class WebFrame extends StatelessWidget {
     final isWebNotMobile = kIsWeb ||
         platform == TargetPlatform.macOS ||
         platform == TargetPlatform.linux ||
-        platform == TargetPlatform.windows &&
-            (platform != TargetPlatform.iOS &&
-                platform != TargetPlatform.android);
+        platform == TargetPlatform.windows && (platform != TargetPlatform.iOS && platform != TargetPlatform.android);
 
     final Size(width: width, height: height) = MediaQuery.of(context).size;
     final aspectRatio = width / height;

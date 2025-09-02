@@ -35,9 +35,7 @@ class _PresentationScreenState extends State<PresentationScreen> {
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: theme.scaffoldBackgroundColor,
-              boxShadow: const [
-                BoxShadow(color: Colors.black26, blurRadius: 8, spreadRadius: 4)
-              ],
+              boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 8, spreadRadius: 4)],
             ),
             child: CustomScrollView(
               physics: const AlwaysScrollableScrollPhysics(
@@ -77,8 +75,7 @@ class _PresentationScreenState extends State<PresentationScreen> {
                                       ),
                                     ),
                                     Table(
-                                      defaultVerticalAlignment:
-                                          TableCellVerticalAlignment.middle,
+                                      defaultVerticalAlignment: TableCellVerticalAlignment.middle,
                                       border: TableBorder(
                                         horizontalInside: BorderSide(
                                           width: 1,
@@ -89,8 +86,7 @@ class _PresentationScreenState extends State<PresentationScreen> {
                                         TableRow(
                                           children: [
                                             const Text("value:"),
-                                            Text(_controller.value
-                                                .toStringAsFixed(2)),
+                                            Text(_controller.value.toStringAsFixed(2)),
                                           ],
                                         ),
                                         TableRow(
@@ -102,8 +98,7 @@ class _PresentationScreenState extends State<PresentationScreen> {
                                         TableRow(
                                           children: [
                                             const Text("scrollingDirection:"),
-                                            Text(_controller
-                                                .scrollingDirection.name),
+                                            Text(_controller.scrollingDirection.name),
                                           ],
                                         ),
                                         TableRow(
@@ -127,23 +122,19 @@ class _PresentationScreenState extends State<PresentationScreen> {
                                         TableRow(
                                           children: [
                                             const Text("dragDetails.delta:"),
-                                            Text(
-                                                '${_controller.dragDetails?.delta}'),
+                                            Text('${_controller.dragDetails?.delta}'),
                                           ],
                                         ),
                                         TableRow(
                                           children: [
-                                            const Text(
-                                                "dragDetails.localPosition:"),
-                                            Text(
-                                                '${_controller.dragDetails?.localPosition}'),
+                                            const Text("dragDetails.localPosition:"),
+                                            Text('${_controller.dragDetails?.localPosition}'),
                                           ],
                                         ),
                                         TableRow(
                                           children: [
                                             const Text("isRefreshEnabled:"),
-                                            Text(_controller.isRefreshEnabled
-                                                .toString()),
+                                            Text(_controller.isRefreshEnabled.toString()),
                                           ],
                                         ),
                                       ],
@@ -153,9 +144,8 @@ class _PresentationScreenState extends State<PresentationScreen> {
                                       child: Switch(
                                         value: _controller.isRefreshEnabled,
                                         activeColor: Colors.lightGreen,
-                                        onChanged: (isEnabled) => isEnabled
-                                            ? _controller.enableRefresh()
-                                            : _controller.disableRefresh(),
+                                        onChanged: (isEnabled) =>
+                                            isEnabled ? _controller.enableRefresh() : _controller.disableRefresh(),
                                       ),
                                     ),
                                   ],
@@ -179,9 +169,7 @@ class _PresentationScreenState extends State<PresentationScreen> {
             return AnimatedBuilder(
               animation: _controller,
               builder: (context, _) => Stack(
-                alignment: _controller.side.isBottom
-                    ? AlignmentDirectional.bottomStart
-                    : AlignmentDirectional.topStart,
+                alignment: _controller.side.isBottom ? AlignmentDirectional.bottomStart : AlignmentDirectional.topStart,
                 children: <Widget>[
                   Container(
                     height: 100,
@@ -198,9 +186,8 @@ class _PresentationScreenState extends State<PresentationScreen> {
                     ),
                   ),
                   Container(
-                    margin: controller.side.isBottom
-                        ? const EdgeInsets.only(bottom: 100)
-                        : const EdgeInsets.only(top: 100),
+                    margin:
+                        controller.side.isBottom ? const EdgeInsets.only(bottom: 100) : const EdgeInsets.only(top: 100),
                     width: double.infinity,
                     height: 50,
                     color: Colors.greenAccent,
@@ -218,8 +205,7 @@ class _PresentationScreenState extends State<PresentationScreen> {
                   Transform.translate(
                     offset: Offset(
                       0.0,
-                      (_controller.side.isBottom ? -100 : 100) *
-                          _controller.value,
+                      (_controller.side.isBottom ? -100 : 100) * _controller.value,
                     ),
                     child: child,
                   ),

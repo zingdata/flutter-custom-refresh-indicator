@@ -138,8 +138,7 @@ class CustomMaterialIndicator extends StatefulWidget {
     required this.onRefresh,
     this.indicatorBuilder,
     this.scrollableBuilder = _defaultBuilder,
-    this.notificationPredicate =
-        CustomRefreshIndicator.defaultScrollNotificationPredicate,
+    this.notificationPredicate = CustomRefreshIndicator.defaultScrollNotificationPredicate,
     this.backgroundColor,
     this.displacement = 40.0,
     this.edgeOffset = 0.0,
@@ -161,14 +160,10 @@ class CustomMaterialIndicator extends StatefulWidget {
     this.indicatorSize = defaultIndicatorSize,
   })  : assert(
           indicatorBuilder == null ||
-              (color == null &&
-                  semanticsValue == null &&
-                  semanticsLabel == null &&
-                  strokeWidth == null),
+              (color == null && semanticsValue == null && semanticsLabel == null && strokeWidth == null),
           'When a custom indicatorBuilder is provided, the parameters color, semanticsValue, semanticsLabel and strokeWidth are unused and can be safely removed.',
         ),
-        strokeWidth =
-            strokeWidth ?? RefreshProgressIndicator.defaultStrokeWidth,
+        strokeWidth = strokeWidth ?? RefreshProgressIndicator.defaultStrokeWidth,
         _isAdaptive = false;
 
   /// Creates a CustomMaterialIndicator widget that displays a different
@@ -182,8 +177,7 @@ class CustomMaterialIndicator extends StatefulWidget {
     required this.onRefresh,
     this.indicatorBuilder,
     this.scrollableBuilder = _defaultBuilder,
-    this.notificationPredicate =
-        CustomRefreshIndicator.defaultScrollNotificationPredicate,
+    this.notificationPredicate = CustomRefreshIndicator.defaultScrollNotificationPredicate,
     this.backgroundColor,
     this.displacement = 40.0,
     this.edgeOffset = 0.0,
@@ -204,33 +198,24 @@ class CustomMaterialIndicator extends StatefulWidget {
     this.indicatorSize = defaultIndicatorSize,
   })  : assert(
           indicatorBuilder == null ||
-              (color == null &&
-                  semanticsValue == null &&
-                  semanticsLabel == null &&
-                  strokeWidth == null),
+              (color == null && semanticsValue == null && semanticsLabel == null && strokeWidth == null),
           'When a custom indicatorBuilder is provided, the parameters color, semanticsValue, semanticsLabel and strokeWidth are unused and can be safely removed.',
         ),
         useMaterialContainer = true,
-        strokeWidth =
-            strokeWidth ?? RefreshProgressIndicator.defaultStrokeWidth,
+        strokeWidth = strokeWidth ?? RefreshProgressIndicator.defaultStrokeWidth,
         _isAdaptive = true;
 
-  static Widget _defaultBuilder(
-          BuildContext context, Widget child, IndicatorController controller) =>
-      child;
+  static Widget _defaultBuilder(BuildContext context, Widget child, IndicatorController controller) => child;
 
   static const defaultIndicatorSize = Size(41, 41);
 
   @override
-  State<CustomMaterialIndicator> createState() =>
-      _CustomMaterialIndicatorState();
+  State<CustomMaterialIndicator> createState() => _CustomMaterialIndicatorState();
 }
 
 class _CustomMaterialIndicatorState extends State<CustomMaterialIndicator> {
   IndicatorController? _internalIndicatorController;
-  IndicatorController get controller =>
-      widget.controller ??
-      (_internalIndicatorController ??= IndicatorController());
+  IndicatorController get controller => widget.controller ?? (_internalIndicatorController ??= IndicatorController());
 
   @override
   void didUpdateWidget(covariant CustomMaterialIndicator oldWidget) {
@@ -257,21 +242,16 @@ class _CustomMaterialIndicatorState extends State<CustomMaterialIndicator> {
     }
 
     assert(
-      widget.controller == null ||
-          (widget.controller != null && _internalIndicatorController == null),
+      widget.controller == null || (widget.controller != null && _internalIndicatorController == null),
       'An internal indicator should not exist when an external indicator is provided.',
     );
   }
 
-  Widget _defaultMaterialIndicatorBuilder(
-      BuildContext context, IndicatorController controller) {
-    final bool showIndeterminateIndicator = controller.isLoading ||
-        controller.isComplete ||
-        controller.isFinalizing;
+  Widget _defaultMaterialIndicatorBuilder(BuildContext context, IndicatorController controller) {
+    final bool showIndeterminateIndicator = controller.isLoading || controller.isComplete || controller.isFinalizing;
 
     return RefreshProgressIndicator(
-      semanticsLabel: widget.semanticsLabel ??
-          MaterialLocalizations.of(context).refreshIndicatorSemanticLabel,
+      semanticsLabel: widget.semanticsLabel ?? MaterialLocalizations.of(context).refreshIndicatorSemanticLabel,
       semanticsValue: widget.semanticsValue,
       value: showIndeterminateIndicator ? null : _valueAnimation.value,
       valueColor: _colorAnimation,
@@ -280,8 +260,7 @@ class _CustomMaterialIndicatorState extends State<CustomMaterialIndicator> {
     );
   }
 
-  Widget _defaultCupertinoIndicatorBuilder(
-      BuildContext context, IndicatorController controller) {
+  Widget _defaultCupertinoIndicatorBuilder(BuildContext context, IndicatorController controller) {
     return CupertinoActivityIndicator(
       color: widget.color,
     );
@@ -351,10 +330,8 @@ class _CustomMaterialIndicatorState extends State<CustomMaterialIndicator> {
       }
     }
 
-    final MaterialIndicatorBuilder indicatorBuilder = widget.indicatorBuilder ??
-        (useMaterial
-            ? _defaultMaterialIndicatorBuilder
-            : _defaultCupertinoIndicatorBuilder);
+    final MaterialIndicatorBuilder indicatorBuilder =
+        widget.indicatorBuilder ?? (useMaterial ? _defaultMaterialIndicatorBuilder : _defaultCupertinoIndicatorBuilder);
 
     return CustomRefreshIndicator(
       autoRebuild: false,
@@ -401,9 +378,7 @@ class _CustomMaterialIndicatorState extends State<CustomMaterialIndicator> {
               displacement: widget.displacement,
               controller: controller,
               child: ScaleTransition(
-                scale: controller.isFinalizing
-                    ? _valueAnimation
-                    : const AlwaysStoppedAnimation(1.0),
+                scale: controller.isFinalizing ? _valueAnimation : const AlwaysStoppedAnimation(1.0),
                 child: indicator,
               ),
             ),

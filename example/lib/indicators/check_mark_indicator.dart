@@ -58,8 +58,7 @@ class CheckMarkIndicator extends StatefulWidget {
   State<CheckMarkIndicator> createState() => _CheckMarkIndicatorState();
 }
 
-class _CheckMarkIndicatorState extends State<CheckMarkIndicator>
-    with SingleTickerProviderStateMixin {
+class _CheckMarkIndicatorState extends State<CheckMarkIndicator> with SingleTickerProviderStateMixin {
   /// Whether to render check mark instead of spinner
   bool _renderCompleteState = false;
 
@@ -132,9 +131,7 @@ class _CheckMarkIndicatorState extends State<CheckMarkIndicator>
                   child: CircularProgressIndicator(
                     strokeWidth: 2,
                     color: style.content,
-                    value: controller.isDragging || controller.isArmed
-                        ? controller.value.clamp(0.0, 1.0)
-                        : null,
+                    value: controller.isDragging || controller.isArmed ? controller.value.clamp(0.0, 1.0) : null,
                   ),
                 ),
         );

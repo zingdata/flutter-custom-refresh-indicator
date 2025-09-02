@@ -31,8 +31,7 @@ class FetchMoreIndicator extends StatelessWidget {
         return AnimatedBuilder(
             animation: controller,
             builder: (context, _) {
-              final dy = controller.value.clamp(0.0, 1.25) *
-                  -(height - (height * 0.25));
+              final dy = controller.value.clamp(0.0, 1.25) * -(height - (height * 0.25));
               return Stack(
                 children: [
                   child,
@@ -67,9 +66,7 @@ class FetchMoreIndicator extends StatelessWidget {
                                 const Text("Fetching..."),
                               ],
                             ),
-                          IndicatorState.complete ||
-                          IndicatorState.finalizing =>
-                            const Text("Fetched 🚀"),
+                          IndicatorState.complete || IndicatorState.finalizing => const Text("Fetched 🚀"),
                         }),
                   ),
                 ],

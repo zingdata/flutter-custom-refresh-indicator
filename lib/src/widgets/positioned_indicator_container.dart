@@ -61,14 +61,11 @@ class PositionedIndicatorContainer extends StatelessWidget {
         ? AlignmentDirectional(-1.0, side.isTop ? 1.0 : -1.0)
         : AlignmentDirectional(side.isLeft ? 1.0 : -1.0, -1.0);
 
-    final endOffset = isVerticalAxis
-        ? Offset(0.0, side.isTop ? 1.0 : -1.0)
-        : Offset(side.isLeft ? 1.0 : -1.0, 0.0);
+    final endOffset = isVerticalAxis ? Offset(0.0, side.isTop ? 1.0 : -1.0) : Offset(side.isLeft ? 1.0 : -1.0, 0.0);
 
     final animation = controller.isFinalizing
         ? AlwaysStoppedAnimation(endOffset)
-        : Tween(begin: const Offset(0.0, 0.0), end: endOffset)
-            .animate(controller);
+        : Tween(begin: const Offset(0.0, 0.0), end: endOffset).animate(controller);
 
     return Positioned(
       top: isHorizontalAxis

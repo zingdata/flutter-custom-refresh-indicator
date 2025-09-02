@@ -12,9 +12,7 @@ class EnvelopRefreshIndicator extends StatelessWidget {
   static const _circleSize = 70.0;
 
   static const _blurRadius = 10.0;
-  static const _defaultShadow = [
-    BoxShadow(blurRadius: _blurRadius, color: Colors.black26)
-  ];
+  static const _defaultShadow = [BoxShadow(blurRadius: _blurRadius, color: Colors.black26)];
 
   const EnvelopRefreshIndicator({
     super.key,
@@ -33,20 +31,16 @@ class EnvelopRefreshIndicator extends StatelessWidget {
       controller: controller,
       leadingScrollIndicatorVisible: leadingScrollIndicatorVisible,
       trailingScrollIndicatorVisible: trailingScrollIndicatorVisible,
-      builder: (context, child, controller) =>
-          LayoutBuilder(builder: (context, constraints) {
+      builder: (context, child, controller) => LayoutBuilder(builder: (context, constraints) {
         final widgetWidth = constraints.maxWidth;
         final widgetHeight = constraints.maxHeight;
         final letterTopWidth = (widgetWidth / 2) + 50;
 
-        final leftValue = (widgetWidth +
-                _blurRadius -
-                ((letterTopWidth + _blurRadius) * controller.value / 1))
+        final leftValue = (widgetWidth + _blurRadius - ((letterTopWidth + _blurRadius) * controller.value / 1))
             .clamp(letterTopWidth - 100, double.infinity);
 
         final rightShift = widgetWidth + _blurRadius;
-        final rightValue = (rightShift - (rightShift * controller.value / 1))
-            .clamp(0.0, double.infinity);
+        final rightValue = (rightShift - (rightShift * controller.value / 1)).clamp(0.0, double.infinity);
 
         final opacity = (controller.value - 1).clamp(0, 0.5) / 0.5;
 
@@ -103,9 +97,7 @@ class EnvelopRefreshIndicator extends StatelessWidget {
                 child: Transform.scale(
                   scale: controller.value,
                   child: Opacity(
-                    opacity: controller.isLoading || controller.state.isSettling
-                        ? 1
-                        : opacity,
+                    opacity: controller.isLoading || controller.state.isSettling ? 1 : opacity,
                     child: Align(
                       alignment: Alignment.center,
                       child: Container(
@@ -113,8 +105,7 @@ class EnvelopRefreshIndicator extends StatelessWidget {
                         height: _circleSize,
                         decoration: BoxDecoration(
                           boxShadow: _defaultShadow,
-                          color:
-                              accent ?? Theme.of(context).colorScheme.primary,
+                          color: accent ?? Theme.of(context).colorScheme.primary,
                           shape: BoxShape.circle,
                         ),
                         child: Stack(
@@ -177,8 +168,7 @@ class TrianglePainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     final shadowPaint = Paint()
       ..color = Colors.black.withAlpha(50)
-      ..maskFilter =
-          MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(10));
+      ..maskFilter = MaskFilter.blur(BlurStyle.normal, convertRadiusToSigma(10));
     canvas
       ..drawPath(path, shadowPaint)
       ..drawPath(path, backgroundPaint);

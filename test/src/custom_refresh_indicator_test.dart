@@ -77,8 +77,7 @@ void main() {
     fakeRefresh.reset();
   });
 
-  testWidgets('CustomRefreshIndicator - default behaviour',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - default behaviour', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -101,14 +100,12 @@ void main() {
     expect(fakeRefresh.called, isTrue);
   });
 
-  testWidgets('CustomRefreshIndicator - nested, with notification predicate',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - nested, with notification predicate', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
           builder: buildWithoutIndicator,
-          notificationPredicate: (ScrollNotification notification) =>
-              notification.depth == 1,
+          notificationPredicate: (ScrollNotification notification) => notification.depth == 1,
           onRefresh: fakeRefresh.instantRefresh,
           child: const SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -180,8 +177,7 @@ void main() {
     expect(fakeRefresh.called, isTrue);
   });
 
-  testWidgets('CustomRefreshIndicator - top - position',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - top - position', (WidgetTester tester) async {
     final controller = IndicatorController();
 
     await tester.pumpWidget(
@@ -211,8 +207,7 @@ void main() {
     expect(controller.scrollingDirection, ScrollDirection.forward);
   });
 
-  testWidgets('CustomRefreshIndicator - reverse - position',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - reverse - position', (WidgetTester tester) async {
     final controller = IndicatorController();
 
     await tester.pumpWidget(
@@ -241,8 +236,7 @@ void main() {
     expect(controller.scrollingDirection, ScrollDirection.forward);
   });
 
-  testWidgets('CustomRefreshIndicator - no movement',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - no movement', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -262,8 +256,7 @@ void main() {
     expect(fakeRefresh.called, isFalse);
   });
 
-  testWidgets('CustomRefreshIndicator - not enough',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - not enough', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -283,8 +276,7 @@ void main() {
     expect(fakeRefresh.called, isFalse);
   });
 
-  testWidgets('CustomRefreshIndicator - just enough',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - just enough', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -304,8 +296,7 @@ void main() {
     expect(fakeRefresh.called, isTrue);
   });
 
-  testWidgets('CustomRefreshIndicator - refresh (programmatically) - slow',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - refresh (programmatically) - slow', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -317,10 +308,7 @@ void main() {
     );
 
     bool completed = false;
-    tester
-        .state<CustomRefreshIndicatorState>(find.byType(CustomRefreshIndicator))
-        .refresh()
-        .then<void>((void value) {
+    tester.state<CustomRefreshIndicatorState>(find.byType(CustomRefreshIndicator)).refresh().then<void>((void value) {
       completed = true;
     });
     await tester.pump();
@@ -332,8 +320,7 @@ void main() {
     expect(completed, isFalse);
   });
 
-  testWidgets('CustomRefreshIndicator - refresh (programmatically) - fast',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - refresh (programmatically) - fast', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -360,10 +347,7 @@ void main() {
     expect(completed, isTrue);
     completed = false;
     fakeRefresh.reset();
-    tester
-        .state<CustomRefreshIndicatorState>(find.byType(CustomRefreshIndicator))
-        .refresh()
-        .then<void>((void value) {
+    tester.state<CustomRefreshIndicatorState>(find.byType(CustomRefreshIndicator)).refresh().then<void>((void value) {
       completed = true;
     });
     await tester.pump();
@@ -389,21 +373,14 @@ void main() {
       );
 
       bool completed = false;
-      tester
-          .state<CustomRefreshIndicatorState>(
-              find.byType(CustomRefreshIndicator))
-          .refresh()
-          .then<void>((void value) {
+      tester.state<CustomRefreshIndicatorState>(find.byType(CustomRefreshIndicator)).refresh().then<void>((void value) {
         completed = true;
       });
 
       /// It is not possible to call the refresh method
       /// when refresh is alrady in progress
       expect(
-        () => tester
-            .state<CustomRefreshIndicatorState>(
-                find.byType(CustomRefreshIndicator))
-            .refresh(),
+        () => tester.state<CustomRefreshIndicatorState>(find.byType(CustomRefreshIndicator)).refresh(),
         throwsA(isA<StateError>()),
       );
 
@@ -417,9 +394,7 @@ void main() {
     },
   );
 
-  testWidgets(
-      'CustomRefreshIndicator - hide (programmatically) - when not shown',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - hide (programmatically) - when not shown', (WidgetTester tester) async {
     final indicatorController = IndicatorController();
 
     await tester.pumpWidget(
@@ -485,8 +460,7 @@ void main() {
     }),
   );
 
-  testWidgets('CustomRefreshIndicator does not force child to relayout',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator does not force child to relayout', (WidgetTester tester) async {
     int layoutCount = 0;
 
     Widget layoutCallback(BuildContext context, BoxConstraints constraints) {
@@ -665,11 +639,9 @@ void main() {
     expect(indicatorController.value, equals(0.0));
   });
 
-  testWidgets(
-      'CustomRefreshIndicator - ScrollController.jumpTo - should not trigger the refresh indicator',
+  testWidgets('CustomRefreshIndicator - ScrollController.jumpTo - should not trigger the refresh indicator',
       (WidgetTester tester) async {
-    final ScrollController scrollController =
-        ScrollController(initialScrollOffset: 500.0);
+    final ScrollController scrollController = ScrollController(initialScrollOffset: 500.0);
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -689,8 +661,7 @@ void main() {
     expect(fakeRefresh.called, isFalse);
   });
 
-  testWidgets('CustomRefreshIndicator - reverse - BouncingScrollPhysics',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - reverse - BouncingScrollPhysics', (WidgetTester tester) async {
     await tester.pumpWidget(
       MaterialApp(
         home: CustomRefreshIndicator(
@@ -717,8 +688,7 @@ void main() {
     expect(fakeRefresh.called, isTrue);
   });
 
-  testWidgets('CustomRefreshIndicator - disallows indicator - glow - leading',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - disallows indicator - glow - leading', (WidgetTester tester) async {
     bool glowAccepted = true;
     ScrollNotification? lastNotification;
 
@@ -732,10 +702,8 @@ void main() {
           child: Builder(builder: (BuildContext context) {
             return NotificationListener<ScrollNotification>(
               onNotification: (ScrollNotification notification) {
-                if (notification is OverscrollNotification &&
-                    lastNotification is! OverscrollNotification) {
-                  final OverscrollIndicatorNotification
-                      confirmationNotification =
+                if (notification is OverscrollNotification && lastNotification is! OverscrollNotification) {
+                  final OverscrollIndicatorNotification confirmationNotification =
                       OverscrollIndicatorNotification(leading: true);
                   confirmationNotification.dispatch(context);
                   glowAccepted = confirmationNotification.accepted;
@@ -766,8 +734,7 @@ void main() {
     expect(glowAccepted, isFalse);
   });
 
-  testWidgets('CustomRefreshIndicator - disallows indicator - glow - trailing',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - disallows indicator - glow - trailing', (WidgetTester tester) async {
     bool glowAccepted = true;
     ScrollNotification? lastNotification;
 
@@ -782,10 +749,8 @@ void main() {
           child: Builder(builder: (BuildContext context) {
             return NotificationListener<ScrollNotification>(
               onNotification: (ScrollNotification notification) {
-                if (notification is OverscrollNotification &&
-                    lastNotification is! OverscrollNotification) {
-                  final OverscrollIndicatorNotification
-                      confirmationNotification =
+                if (notification is OverscrollNotification && lastNotification is! OverscrollNotification) {
+                  final OverscrollIndicatorNotification confirmationNotification =
                       OverscrollIndicatorNotification(leading: false);
                   confirmationNotification.dispatch(context);
                   glowAccepted = confirmationNotification.accepted;
@@ -816,8 +781,7 @@ void main() {
     expect(glowAccepted, isFalse);
   });
 
-  testWidgets('CustomRefreshIndicator - disallows indicator - stretch',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - disallows indicator - stretch', (WidgetTester tester) async {
     bool stretchAccepted = true;
     ScrollNotification? lastNotification;
 
@@ -831,10 +795,8 @@ void main() {
           child: Builder(builder: (BuildContext context) {
             return NotificationListener<ScrollNotification>(
               onNotification: (ScrollNotification notification) {
-                if (notification is OverscrollNotification &&
-                    lastNotification is! OverscrollNotification) {
-                  final OverscrollIndicatorNotification
-                      confirmationNotification =
+                if (notification is OverscrollNotification && lastNotification is! OverscrollNotification) {
+                  final OverscrollIndicatorNotification confirmationNotification =
                       OverscrollIndicatorNotification(leading: true);
                   confirmationNotification.dispatch(context);
                   stretchAccepted = confirmationNotification.accepted;
@@ -919,8 +881,7 @@ void main() {
     expect(indicatorController.value, equals(0.0));
   });
 
-  testWidgets(
-      'CustomRefreshIndicator - trigger - end edge  - should be shown only when dragging from the end edge',
+  testWidgets('CustomRefreshIndicator - trigger - end edge  - should be shown only when dragging from the end edge',
       (WidgetTester tester) async {
     final indicatorController = IndicatorController();
     await tester.pumpWidget(
@@ -958,8 +919,7 @@ void main() {
     expect(indicatorController.value, equals(0.0));
   });
 
-  testWidgets(
-      'CustomRefreshIndicator - trigger - start edge  - should be shown only when dragging from the end edge',
+  testWidgets('CustomRefreshIndicator - trigger - start edge  - should be shown only when dragging from the end edge',
       (WidgetTester tester) async {
     final indicatorController = IndicatorController();
     await tester.pumpWidget(
@@ -996,8 +956,7 @@ void main() {
     expect(indicatorController.value, equals(0.0));
   });
 
-  testWidgets('CustomRefreshIndicator - onStateChanged',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - onStateChanged', (WidgetTester tester) async {
     final changes = <IndicatorStateChange>[];
     await tester.pumpWidget(
       MaterialApp(
@@ -1048,8 +1007,7 @@ void main() {
     expect(fakeRefresh.called, isTrue);
   });
 
-  testWidgets('CustomRefreshIndicator - onStateChanged - with completed state',
-      (WidgetTester tester) async {
+  testWidgets('CustomRefreshIndicator - onStateChanged - with completed state', (WidgetTester tester) async {
     final changes = <IndicatorStateChange>[];
     await tester.pumpWidget(
       MaterialApp(
@@ -1109,8 +1067,7 @@ void main() {
     expect(fakeRefresh.called, isTrue);
   });
 
-  testWidgets(
-      'CustomRefreshIndicator - BouncingPhysics - start from scroll update notification',
+  testWidgets('CustomRefreshIndicator - BouncingPhysics - start from scroll update notification',
       (WidgetTester tester) async {
     final indicatorController = IndicatorController();
     final scrollController = ScrollController(initialScrollOffset: 0);
@@ -1124,8 +1081,7 @@ void main() {
           child: DefaultList(
             itemsCount: 1,
             controller: scrollController,
-            physics: const AlwaysScrollableScrollPhysics(
-                parent: BouncingScrollPhysics()),
+            physics: const AlwaysScrollableScrollPhysics(parent: BouncingScrollPhysics()),
           ),
         ),
       ),
@@ -1158,8 +1114,7 @@ void main() {
     expect(fakeRefresh.called, isTrue);
   });
 
-  testWidgets(
-      'CustomRefreshIndicator - autoRebuild - true - rebuilds the builder function with each change',
+  testWidgets('CustomRefreshIndicator - autoRebuild - true - rebuilds the builder function with each change',
       (WidgetTester tester) async {
     int indicatorChangesCount = 0;
     int rebuildsCount = 0;
@@ -1201,8 +1156,7 @@ void main() {
     expect(rebuildsCount, lessThan(indicatorChangesCount));
   });
 
-  testWidgets(
-      'CustomRefreshIndicator - autoRebuild - false - invokes the builder function only for state changes',
+  testWidgets('CustomRefreshIndicator - autoRebuild - false - invokes the builder function only for state changes',
       (WidgetTester tester) async {
     int indicatorChangesCount = 0;
     int rebuildsCount = 0;

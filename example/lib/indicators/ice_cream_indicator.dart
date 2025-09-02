@@ -27,8 +27,7 @@ class IceCreamIndicator extends StatefulWidget {
   State<IceCreamIndicator> createState() => _IceCreamIndicatorState();
 }
 
-class _IceCreamIndicatorState extends State<IceCreamIndicator>
-    with SingleTickerProviderStateMixin {
+class _IceCreamIndicatorState extends State<IceCreamIndicator> with SingleTickerProviderStateMixin {
   static const _assets = <ParallaxConfig>[
     ParallaxConfig(
       image: AssetImage("assets/ice_cream_indicator/cup2.png"),
@@ -68,8 +67,7 @@ class _IceCreamIndicatorState extends State<IceCreamIndicator>
 
   @override
   void initState() {
-    _spoonController =
-        AnimationController(vsync: this, duration: const Duration(seconds: 1));
+    _spoonController = AnimationController(vsync: this, duration: const Duration(seconds: 1));
     WidgetsBinding.instance.addPostFrameCallback((_) => _precacheImages());
     super.initState();
   }
@@ -138,9 +136,7 @@ class _IceCreamIndicatorState extends State<IceCreamIndicator>
                             child: _buildImage(controller, _assets[i]),
                             builder: (context, child) {
                               return Transform.rotate(
-                                angle: (-_spoonTween
-                                        .transform(_spoonController.value)) *
-                                    1.25,
+                                angle: (-_spoonTween.transform(_spoonController.value)) * 1.25,
                                 child: child,
                               );
                             },

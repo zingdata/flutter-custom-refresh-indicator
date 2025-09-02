@@ -48,12 +48,9 @@ class BallIndicator extends StatefulWidget {
   State<BallIndicator> createState() => _BallIndicatorState();
 }
 
-class _BallIndicatorState extends State<BallIndicator>
-    with TickerProviderStateMixin {
+class _BallIndicatorState extends State<BallIndicator> with TickerProviderStateMixin {
   IndicatorController? _internalIndicatorController;
-  IndicatorController get controller =>
-      widget.controller ??
-      (_internalIndicatorController ??= IndicatorController());
+  IndicatorController get controller => widget.controller ?? (_internalIndicatorController ??= IndicatorController());
 
   late final Ticker _ticker;
   final _ballPosition = ValueNotifier<Offset>(Offset.zero);
@@ -80,8 +77,7 @@ class _BallIndicatorState extends State<BallIndicator>
 
   @override
   void initState() {
-    _ballColor =
-        widget.ballColors.length > 1 ? widget.ballColors.random : Colors.blue;
+    _ballColor = widget.ballColors.length > 1 ? widget.ballColors.random : Colors.blue;
 
     _ticker = createTicker(_onTick);
     _shakeController.addStatusListener(_onShakeStatusChanged);
@@ -93,15 +89,13 @@ class _BallIndicatorState extends State<BallIndicator>
   void didUpdateWidget(covariant BallIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (oldWidget.controller != widget.controller &&
-        widget.controller != null) {
+    if (oldWidget.controller != widget.controller && widget.controller != null) {
       _internalIndicatorController?.dispose();
       _internalIndicatorController = null;
     }
 
     assert(
-      widget.controller == null ||
-          (widget.controller != null && _internalIndicatorController == null),
+      widget.controller == null || (widget.controller != null && _internalIndicatorController == null),
       'An internal indicator should not exist when an external indicator is provided.',
     );
   }
@@ -126,8 +120,7 @@ class _BallIndicatorState extends State<BallIndicator>
 
       // Update ball color
       if (widget.ballColors.length > 1) {
-        final colors =
-            widget.ballColors.where((color) => color != _ballColor).toList();
+        final colors = widget.ballColors.where((color) => color != _ballColor).toList();
         _ballColor = colors.random;
       }
 
@@ -141,11 +134,9 @@ class _BallIndicatorState extends State<BallIndicator>
     final delta = time - _prevTickerDuration;
     _prevTickerDuration = time;
 
-    Offset ballPosition = _ballPosition.value +
-        _direction * delta.inMilliseconds.toDouble() * widget.acceleration;
+    Offset ballPosition = _ballPosition.value + _direction * delta.inMilliseconds.toDouble() * widget.acceleration;
 
-    final Size ballSafeSpace = Size(_rectSize.width - widget.ballRadius * 2,
-        _rectSize.height - widget.ballRadius * 2);
+    final Size ballSafeSpace = Size(_rectSize.width - widget.ballRadius * 2, _rectSize.height - widget.ballRadius * 2);
 
     if (ballPosition.dx < 0) {
       _onHitBorder(_direction);
@@ -184,8 +175,7 @@ class _BallIndicatorState extends State<BallIndicator>
     required Offset origin,
     required Offset point,
   }) {
-    final double angle =
-        math.atan2(point.dy - origin.dy, point.dx - origin.dx) - (math.pi / 2);
+    final double angle = math.atan2(point.dy - origin.dy, point.dx - origin.dx) - (math.pi / 2);
 
     final normalizedAngle = (angle + math.pi) % (2 * math.pi) - math.pi;
     return normalizedAngle;
@@ -329,9 +319,7 @@ class _BallIndicatorState extends State<BallIndicator>
                     );
                   },
                 ),
-              if (controller.isLoading ||
-                  controller.isSettling ||
-                  controller.isComplete)
+              if (controller.isLoading || controller.isSettling || controller.isComplete)
                 Align(
                   alignment: Alignment.topLeft,
                   child: AnimatedBuilder(
@@ -344,10 +332,7 @@ class _BallIndicatorState extends State<BallIndicator>
                     },
                   ),
                 ),
-              if (controller.isDragging ||
-                  controller.isArmed ||
-                  controller.isCanceling ||
-                  controller.isFinalizing)
+              if (controller.isDragging || controller.isArmed || controller.isCanceling || controller.isFinalizing)
                 PositionedTransition(
                   rect: RelativeRectTween(
                     begin: RelativeRect.fromRect(
@@ -469,12 +454,10 @@ class ArrowPainter extends CustomPainter {
     /// Calculate the vector from A to B
     Offset direction = end - start;
     // Calculate the magnitude of the direction vector
-    double magnitude =
-        math.sqrt(direction.dx * direction.dx + direction.dy * direction.dy);
+    double magnitude = math.sqrt(direction.dx * direction.dx + direction.dy * direction.dy);
 
     /// Normalize the vector
-    Offset unitVector =
-        Offset(direction.dx / magnitude, direction.dy / magnitude);
+    Offset unitVector = Offset(direction.dx / magnitude, direction.dy / magnitude);
 
     /// Scale the unit vector by 50 to get the new point offset
     Offset startFrom = start + unitVector * distanceFromCenter;
@@ -483,16 +466,13 @@ class ArrowPainter extends CustomPainter {
 
     /// Arrowhead settings
     double arrowLength = 20; // Length of the arrow lines
-    double arrowAngle =
-        math.pi / 6; // Angle of the arrow lines from the main line
+    double arrowAngle = math.pi / 6; // Angle of the arrow lines from the main line
 
     /// Calculating arrowhead lines
     final arrowEnd1 = Offset(
-        end.dx - arrowLength * math.sin(angle - arrowAngle),
-        end.dy + arrowLength * math.cos(angle - arrowAngle));
+        end.dx - arrowLength * math.sin(angle - arrowAngle), end.dy + arrowLength * math.cos(angle - arrowAngle));
     final arrowEnd2 = Offset(
-        end.dx - arrowLength * math.sin(angle + arrowAngle),
-        end.dy + arrowLength * math.cos(angle + arrowAngle));
+        end.dx - arrowLength * math.sin(angle + arrowAngle), end.dy + arrowLength * math.cos(angle + arrowAngle));
 
     final path = Path()
       ..moveTo(arrowEnd1.dx, arrowEnd1.dy)
